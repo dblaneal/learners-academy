@@ -1,0 +1,13 @@
+
+/*CSS for log out button*/
+
+.logoutLink {
+  background-color: transparent;
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+  margin-left: 18px;
+}
+logoutLink:focus {
+  outline: none;
+}

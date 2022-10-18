@@ -1,0 +1,46 @@
+package com.learnersAcademy.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.learnersAcademy.bean.LATeacherClassBean;
+import com.learnersAcademy.service.LATeacherClassService;
+
+/**
+ * Servlet implementation class LAAjaxClassServlet
+ */
+@WebServlet("/ajaxTeacherClass")
+public class LAAjaxClassServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public LAAjaxClassServlet() {
+        super();
+    }
+    //Receive ajax request for selectAllTeacherClassByID and response json
+    /**
+     * 
+     */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int id = Integer.parseInt(request.getParameter("id")) ;
+		Gson gson = new Gson();
+		List<LATeacherClassBean> tcList = new LATeacherClassService().selectAllTeacherClassByID(id);
+		PrintWriter out = response.getWriter();
+		out.print(gson.toJson(tcList));
+		out.flush();
+		out.close();
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
